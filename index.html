@@ -141,8 +141,7 @@
 
       <a-assets>
         <!-- Load the GIF image as a texture -->
-        <video id="greenscreenvideo" opacity="0" loop="true" autoplay playsinline webkit-playsinline muted="true"
-          crossorigin="anonymous"
+        <video id="greenscreenvideo" opacity="0" loop="true" playsinline webkit-playsinline muted="true" crossorigin="anonymous"
           src="https://gpfkyanqtylaxmkyzdrv.supabase.co/storage/v1/object/public/Zepto//N2%20sideA.mp4"></video>
       </a-assets>
 
@@ -181,9 +180,6 @@
     // Start AR on tap
     function startAR() {
       document.getElementById('startContainer').style.display = "none";
-      let video = document.getElementById('greenscreenvideo');
-      video.muted = false;  // Unmute the video
-      video.play();         // Ensure playback is triggered
     }
 
     AFRAME.registerComponent('mytarget', {
@@ -192,10 +188,21 @@
           console.log("Target found");
           document.getElementById('example-scanning-overlay').style.display = 'none';
           document.getElementById('scanText').style.display = 'none';
+
+          // Play the video when the target is found
+          let video = document.getElementById('greenscreenvideo');
+          video.muted = false;  // Unmute the video
+          video.play();         // Ensure playback is triggered
         });
+
         this.el.addEventListener('targetLost', event => {
           console.log("Target lost");
           document.getElementById('example-scanning-overlay').style.display = 'flex';
+
+          // Pause the video when the target is lost
+          let video = document.getElementById('greenscreenvideo');
+          video.pause();
+          video.currentTime = 0;  // Reset to the start
         });
       }
     });
