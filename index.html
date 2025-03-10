@@ -141,8 +141,8 @@
 
       <a-assets>
         <!-- Load the GIF image as a texture -->
-        <video id="greenscreenvideo" opacity="0" loop="true" autoplay playsinline webkit-playsinline
-        muted="false" crossorigin="anonymous"
+        <video id="greenscreenvideo" opacity="0" loop="true" autoplay playsinline webkit-playsinline muted="true"
+          crossorigin="anonymous"
           src="https://gpfkyanqtylaxmkyzdrv.supabase.co/storage/v1/object/public/Zepto//N2%20sideA.mp4"></video>
       </a-assets>
 
@@ -181,6 +181,9 @@
     // Start AR on tap
     function startAR() {
       document.getElementById('startContainer').style.display = "none";
+      let video = document.getElementById('greenscreenvideo');
+      video.muted = false;  // Unmute the video
+      video.play();         // Ensure playback is triggered
     }
 
     AFRAME.registerComponent('mytarget', {
